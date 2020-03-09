@@ -1,0 +1,56 @@
+var search_contacts = function(){
+    //write code here for when the value of search filter for contacts is changed
+    document.getElementById("contacts").innerHTML = "";
+    let search_text = document.getElementById("search").value;
+    let contact_list = document.getElementById("contacts");
+    contacts.forEach(function(item){
+        if(item["nickname"].toLowerCase().includes(search_text.toLowerCase()) || item["fullname"].toLowerCase().includes(search_text.toLowerCase())){
+             let li = document.createElement("li");
+             let text = document.createTextNode(item["nickname"]);
+             li.appendChild(text);
+             contact_list.appendChild(li);
+        }
+    });
+}
+
+var contact_selected = function(){
+    //write code here for when a contact is selected
+    let selected_nickname = this.querySelector(".contact_list li:hover").textContent;
+    contacts.forEach(function(item){
+        if(item["nickname"]==selected_nickname){
+            document.getElementById("nickname").textContent = item["nickname"];
+            document.getElementById("fullname").textContent = item["fullname"];
+            document.getElementById("photo").src = item["imageurl"];
+            document.getElementById("bday").textContent = item["bday"];
+            document.getElementById("gender").textContent = item["gender"];
+            document.getElementById("address").textContent = item["addr"];
+            document.getElementById("email").textContent = item["email"];
+        }
+    });
+    search_projects();
+}
+
+var search_projects = function(){
+    //write code here for when the value of search filter for projects is changed
+    document.getElementById("projects").innerHTML = "";
+    for(let i = 0; i < contacts.length; i++){
+        if(contacts[i]["nickname"]==document.getElementById("nickname").textContent){
+            contacts[i]["projects"].forEach(function(item){
+                let search_text = document.getElementById("search_project").value;
+                if(search_text.length < 1 || item["project_name"].toLowerCase().includes(search_text.toLowerCase())){
+                    let tr = document.createElement("tr");
+                    let td1 = document.createElement("td");
+                    let td2 = document.createElement("td");
+                    let project_name = document.createTextNode(item["project_name"]);
+                    let year = document.createTextNode(item["year"]);
+                    td1.appendChild(project_name);
+                    td2.appendChild(year);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    document.getElementById("projects").appendChild(tr);
+                }
+            });
+            break;
+        }
+    }
+}
