@@ -91,7 +91,27 @@
 	</div>
 	<div id="prelim" style="display:<?php if(isset($_POST["student_id"]) && $valid){echo 'block;';}else{echo 'none;';}?>">
 		<div id="instructions">
-			<p>The form below the blue line is a Contact Lookup Tool. The application is initially connecting to the webservice "contact_ws.php" returning all contact information via json format and storing it in the global variable contact_info.</p>
+			<p>The form below the blue line is a Contact Lookup Tool. The application is initially connecting to the webservice "contact_ws.php" returning all contact information via json format and storing it in the global variable contact_info. See below sample format of the json:</p>
+			<p>
+			[
+			    {
+				"contact_id":"C001",
+				"nickname":"kate",
+				"fullname":"kathryn bailey beckinsale",
+				"bday":"26-jul-1973",
+				"gender":"female",
+				"addr":"#23 underworld drive",
+				"email":"kate@lycans.net",
+				"imageurl":"images\/001.jpg",
+				"projects":[
+				    {
+					"project_name":"Children in Need",
+					"year":"2003"
+				    }
+				]
+			    }
+			]
+			</p>
 			<p>Write a script that will filter the list of contacts and their projects based on the search keywords (should work for both nickname and full name).</p>
 			<p>The list of contacts by nickname in the unordered list element (id ="contacts"). As you type a text in the search box (id="search"), the contacts should be filtered based on the search term. If a contact is clicked, its details should reflect the values in the form.</p>
 			<p>Do the same thing for list the projects of the contacts using the search box (id="search_project"). List down their projects in the table (id="projects").</p>
